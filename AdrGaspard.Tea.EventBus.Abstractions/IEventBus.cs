@@ -1,31 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AdrGaspard.Tea.CommonTools;
 
 namespace AdrGaspard.Tea.EventBus.Abstractions
 {
     public interface IEventBus
     {
-        Task PublishAsync<TEvent>(TEvent eventData) where TEvent : class;
+        Task<Result> PublishAsync<TEvent>(TEvent @event) where TEvent : IntegrationEvent;
 
-        Task PublishAsync(Type eventType, object eventData);
+        Result<IDisposable> Subscribe<TEvent, THandler>() where TEvent : IntegrationEvent where THandler : IEventHandler<TEvent>, new();
 
-        IDisposable Subscribe<TEvent>(Func<TEvent, Task> action) where TEvent : class;
+        Result<IDisposable> Subscribe<TEvent>(IEventHandler<TEvent> handler) where TEvent : IntegrationEvent;
 
-        IDisposable Subscribe<TEvent, THandler>() where TEvent : class where THandler : IEventHandler, new();
+        void Unsubscribe<TEvent>(IEventHandler<TEvent> handler) where TEvent : IntegrationEvent;
 
-        IDisposable Subscribe(Type eventType, IEventHandler handler);
-
-        void Unsubscribe<TEvent>(Func<TEvent, Task> action) where TEvent : class;
-
-        void Unsubscribe<TEvent>(ILocalEventHandler<TEvent> handler) where TEvent : class;
-
-        void Unsubscribe(Type eventType, IEventHandler handler);
-
-        void UnsubscribeAll<TEvent>() where TEvent : class;
-
-        void UnsubscribeAll(Type eventType);
+        void UnsubscribeAll<TEvent>() where TEvent : IntegrationEvent;
     }
 }
