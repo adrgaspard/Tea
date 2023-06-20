@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace AdrGaspard.Tea.Domain.Repositories
 {
-    public abstract class RepositoryBase<TEntity, TKey> : ReadOnlyRepositoryBase<TEntity, TKey> where TEntity : class, IEntity<TKey>
+    public abstract class RepositoryBase<TEntity> : ReadOnlyRepositoryBase<TEntity>, IRepository<TEntity> where TEntity : class, IEntity
     {
         protected static readonly Type _entityType;
         protected static readonly PropertyInfo? _entityTypeCreationTimeProperty;
@@ -106,5 +106,16 @@ namespace AdrGaspard.Tea.Domain.Repositories
             }
             return Result.Ok;
         }
+    }
+
+    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey> where TKey : IEquatable<TKey>
+    {
+        public abstract Task<Result<TEntity>> GetOneAsync(TKey id, CancellationToken cancellationToken = default);
+
+        public abstract Task<Result<TEntity?>> GetOneOrDefaultAsync(TKey id, CancellationToken cancellationToken = default);
+
+        public abstract Task<Result<TEntity>> GetSingleAsync(TKey id, CancellationToken cancellationToken = default);
+
+        public abstract Task<Result<TEntity?>> GetSingleOrDefaultAsync(TKey id, CancellationToken cancellationToken = default);
     }
 }

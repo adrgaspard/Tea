@@ -1,7 +1,7 @@
 ﻿namespace AdrGaspard.Tea.Domain.Auditing
 {
     [Serializable]
-    public abstract class DeleteAuditedEntity<TKey> : SoftDeleteEntity<TKey>, IHasDeletionTime
+    public abstract class DeleteAuditedEntity<TKey> : SoftDeleteEntity<TKey>, IHasDeletionTime where TKey : IEquatable<TKey>
     {
         public DateTime? DeletionTime { get; private set; }
 

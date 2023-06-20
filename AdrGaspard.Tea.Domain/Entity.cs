@@ -3,7 +3,60 @@
 namespace AdrGaspard.Tea.Domain
 {
     [Serializable]
-    public abstract class Entity<TKey> : IEntity<TKey>, IEquatable<IEntity<TKey>>
+    public abstract class Entity : IEntity, IEquatable<IEntity>
+    {
+        protected Entity() { }
+
+        public override string ToString()
+        {
+            return $"[Entity: {GetType().Name}]";
+        }
+
+        public bool Equals(IEntity? other)
+        {
+            if (other is null) { return false; }
+            if (ReferenceEquals(this, other)) { return true; }
+            Type type = GetType();
+            Type otherType = other.GetType();
+            if (!type.IsAssignableFrom(otherType) && !otherType.IsAssignableFrom(type)) { return false; }
+            object[] key = GetKey();
+            object[] otherKey = other.GetKey();
+            if (key.Length != otherKey.Length || key.Length == 0) { return false; }
+            for (int i = 0; i < key.Length; i++)
+            {
+                if (!key[i].Equals(otherKey[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as IEntity);
+        }
+
+        public static bool operator ==(Entity left, Entity right)
+        {
+            return left is not null && left.Equals(right);
+        }
+
+        public static bool operator !=(Entity left, Entity right)
+        {
+            return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            return GetKey().GetHashCode();
+        }
+
+        public abstract object[] GetKey();
+    }
+
+    [Serializable]
+    public abstract class Entity<TKey> : Entity, IEntity<TKey>, IEquatable<IEntity<TKey>> where TKey : IEquatable<TKey>
     {
         [Key]
         public TKey Id { get; private set; }
@@ -24,12 +77,16 @@ namespace AdrGaspard.Tea.Domain
 
         public bool Equals(IEntity<TKey>? other)
         {
-            return this == other;
+            if (other is null) { return false; }
+            if (ReferenceEquals(this, other)) { return true; }
+            Type type = GetType();
+            Type otherType = other.GetType();
+            return (type.IsAssignableFrom(otherType) || otherType.IsAssignableFrom(type)) && other.Id is not null && !Id.Equals(default) && !other.Id.Equals(default) && Id.Equals(other.Id);
         }
 
         public override bool Equals(object? obj)
         {
-            return Equals(obj as Entity<TKey>);
+            return Equals(obj as IEntity<TKey>);
         }
 
         public override int GetHashCode()
@@ -39,18 +96,17 @@ namespace AdrGaspard.Tea.Domain
 
         public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
         {
-            if (left is null || right is null) { return false; }
-            if (ReferenceEquals(left, right)) { return true; }
-            Type leftType = left.GetType();
-            Type rightType = right.GetType();
-            return (leftType.IsAssignableFrom(rightType) || rightType.IsAssignableFrom(leftType))
-&& left.Id is not null && right.Id is not null && !left.Id.Equals(default(TKey)) && !right.Id.Equals(default(TKey))
-&& left.Id.Equals(right.Id);
+            return left is not null && left.Equals(right);
         }
 
         public static bool operator !=(Entity<TKey> left, Entity<TKey> right)
         {
             return !(left == right);
+        }
+
+        public override object[] GetKey()
+        {
+            return new object[1] { Id };
         }
     }
 }

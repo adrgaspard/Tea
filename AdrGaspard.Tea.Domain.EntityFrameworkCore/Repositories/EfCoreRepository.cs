@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
 {
-    public class EfCoreRepository<TDbContext, TEntity, TKey> : RepositoryBase<TEntity, TKey>, IEfCoreRepository<TEntity, TKey> where TDbContext : DbContext where TEntity : class, IEntity<TKey>
+    public class EfCoreRepository<TDbContext, TEntity> : RepositoryBase<TEntity>, IEfCoreRepository<TEntity> where TDbContext : DbContext where TEntity : class, IEntity
     {
         protected readonly TDbContext _context;
         protected readonly DbSet<TEntity> _set;
@@ -265,35 +265,11 @@ namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
             }
         }
 
-        public override async Task<Result<TEntity>> GetOneAsync(TKey id, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _set.FirstAsync(entity => entity.Id!.Equals(id), cancellationToken);
-            }
-            catch (Exception exception)
-            {
-                return exception;
-            }
-        }
-
         public override async Task<Result<TEntity?>> GetOneOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             try
             {
                 return await _set.FirstOrDefaultAsync(predicate, cancellationToken);
-            }
-            catch (Exception exception)
-            {
-                return exception;
-            }
-        }
-
-        public override async Task<Result<TEntity?>> GetOneOrDefaultAsync(TKey id, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _set.FirstOrDefaultAsync(entity => entity.Id!.Equals(id), cancellationToken);
             }
             catch (Exception exception)
             {
@@ -318,35 +294,11 @@ namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
             }
         }
 
-        public override async Task<Result<TEntity>> GetSingleAsync(TKey id, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _set.SingleAsync(entity => entity.Id!.Equals(id), cancellationToken);
-            }
-            catch (Exception exception)
-            {
-                return exception;
-            }
-        }
-
         public override async Task<Result<TEntity?>> GetSingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             try
             {
                 return await _set.SingleOrDefaultAsync(predicate, cancellationToken);
-            }
-            catch (Exception exception)
-            {
-                return exception;
-            }
-        }
-
-        public override async Task<Result<TEntity?>> GetSingleOrDefaultAsync(TKey id, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _set.SingleOrDefaultAsync(entity => entity.Id!.Equals(id), cancellationToken);
             }
             catch (Exception exception)
             {
@@ -490,6 +442,61 @@ namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
             {
                 _ = await _context.SaveChangesAsync(cancellationToken);
                 return Result.Ok;
+            }
+            catch (Exception exception)
+            {
+                return exception;
+            }
+        }
+    }
+
+    public class EfCoreRepository<TDbContext, TEntity, TKey> : EfCoreRepository<TDbContext, TEntity>, IEfCoreRepository<TEntity, TKey> where TDbContext : DbContext where TEntity : class, IEntity<TKey> where TKey : IEquatable<TKey>
+    {
+        public EfCoreRepository(TDbContext context) : base(context)
+        {
+        }
+
+        public async Task<Result<TEntity>> GetOneAsync(TKey id, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _set.FirstAsync(entity => entity.Id!.Equals(id), cancellationToken);
+            }
+            catch (Exception exception)
+            {
+                return exception;
+            }
+        }
+
+        public async Task<Result<TEntity?>> GetOneOrDefaultAsync(TKey id, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _set.FirstOrDefaultAsync(entity => entity.Id!.Equals(id), cancellationToken);
+            }
+            catch (Exception exception)
+            {
+                return exception;
+            }
+        }
+
+        public async Task<Result<TEntity>> GetSingleAsync(TKey id, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _set.SingleAsync(entity => entity.Id!.Equals(id), cancellationToken);
+            }
+            catch (Exception exception)
+            {
+                return exception;
+            }
+        }
+
+        public async Task<Result<TEntity?>> GetSingleOrDefaultAsync(TKey id, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _set.SingleOrDefaultAsync(entity => entity.Id!.Equals(id), cancellationToken);
             }
             catch (Exception exception)
             {

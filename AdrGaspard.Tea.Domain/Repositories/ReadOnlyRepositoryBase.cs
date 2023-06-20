@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace AdrGaspard.Tea.Domain.Repositories
 {
-    public abstract class ReadOnlyRepositoryBase<TEntity, TKey> : IReadOnlyRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
+    public abstract class ReadOnlyRepositoryBase<TEntity> : IReadOnlyRepository<TEntity> where TEntity : class, IEntity
     {
         public abstract Task<Result<TEntity>> GetOneAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
@@ -33,6 +33,11 @@ namespace AdrGaspard.Tea.Domain.Repositories
 
         public abstract Task<Result<long>> GetCountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
+        public abstract Task<Result<IQueryable<TEntity>>> GetQueryableAsync(CancellationToken cancellationToken = default);
+    }
+
+    public abstract class ReadOnlyRepositoryBase<TEntity, TKey> : ReadOnlyRepositoryBase<TEntity>, IReadOnlyRepository<TEntity, TKey> where TEntity : class, IEntity<TKey> where TKey : IEquatable<TKey>
+    {
         public abstract Task<Result<TEntity>> GetOneAsync(TKey id, CancellationToken cancellationToken = default);
 
         public abstract Task<Result<TEntity?>> GetOneOrDefaultAsync(TKey id, CancellationToken cancellationToken = default);
@@ -40,7 +45,5 @@ namespace AdrGaspard.Tea.Domain.Repositories
         public abstract Task<Result<TEntity>> GetSingleAsync(TKey id, CancellationToken cancellationToken = default);
 
         public abstract Task<Result<TEntity?>> GetSingleOrDefaultAsync(TKey id, CancellationToken cancellationToken = default);
-
-        public abstract Task<Result<IQueryable<TEntity>>> GetQueryableAsync(CancellationToken cancellationToken = default);
     }
 }

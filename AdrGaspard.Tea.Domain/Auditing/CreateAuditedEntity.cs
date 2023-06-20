@@ -1,7 +1,7 @@
 ﻿namespace AdrGaspard.Tea.Domain.Auditing
 {
     [Serializable]
-    public abstract class CreateAuditedEntity<TKey> : Entity<TKey>, IHasCreationTime
+    public abstract class CreateAuditedEntity<TKey> : Entity<TKey>, IHasCreationTime where TKey : IEquatable<TKey>
     {
         public DateTime CreationTime { get; private set; }
 

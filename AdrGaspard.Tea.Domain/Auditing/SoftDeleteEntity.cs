@@ -1,7 +1,7 @@
 ﻿namespace AdrGaspard.Tea.Domain.Auditing
 {
     [Serializable]
-    public abstract class SoftDeleteEntity<TKey> : Entity<TKey>, ISoftDelete
+    public abstract class SoftDeleteEntity<TKey> : Entity<TKey>, ISoftDelete where TKey : IEquatable<TKey>
     {
         public bool IsDeleted { get; private set; }
 
