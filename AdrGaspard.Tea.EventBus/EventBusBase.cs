@@ -1,9 +1,8 @@
 ﻿using AdrGaspard.Tea.CommonTools;
-using AdrGaspard.Tea.EventBus.Abstractions;
-using AdrGaspard.Tea.EventBus.Core.Exceptions;
+using AdrGaspard.Tea.EventBus.Exceptions;
 using System.Reflection;
 
-namespace AdrGaspard.Tea.EventBus.Core
+namespace AdrGaspard.Tea.EventBus
 {
     public abstract class EventBusBase : IEventBus, IDisposable
     {

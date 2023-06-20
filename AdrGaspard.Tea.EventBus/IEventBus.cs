@@ -1,6 +1,6 @@
 ﻿using AdrGaspard.Tea.CommonTools;
 
-namespace AdrGaspard.Tea.EventBus.Abstractions
+namespace AdrGaspard.Tea.EventBus
 {
     public interface IEventBus
     {

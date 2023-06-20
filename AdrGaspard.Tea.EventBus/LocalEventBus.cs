@@ -1,7 +1,6 @@
 ﻿using AdrGaspard.Tea.CommonTools;
-using AdrGaspard.Tea.EventBus.Abstractions;
 
-namespace AdrGaspard.Tea.EventBus.Core
+namespace AdrGaspard.Tea.EventBus
 {
     public class LocalEventBus : EventBusBase, ILocalEventBus, IDistributedEventBus
     {

@@ -1,7 +1,6 @@
 ﻿using AdrGaspard.Tea.CommonTools;
-using AdrGaspard.Tea.EventBus.Abstractions;
 
-namespace AdrGaspard.Tea.EventBus.Core.Exceptions
+namespace AdrGaspard.Tea.EventBus.Exceptions
 {
     public class EventBusException : ErrorException
     {

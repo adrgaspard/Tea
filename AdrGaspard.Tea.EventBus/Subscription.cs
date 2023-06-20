@@ -1,6 +1,4 @@
-﻿using AdrGaspard.Tea.EventBus.Abstractions;
-
-namespace AdrGaspard.Tea.EventBus.Core
+﻿namespace AdrGaspard.Tea.EventBus
 {
     internal sealed class Subscription : IDisposable, IComparable<Subscription>
     {

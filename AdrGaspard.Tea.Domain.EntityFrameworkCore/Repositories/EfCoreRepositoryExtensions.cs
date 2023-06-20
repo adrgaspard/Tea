@@ -1,8 +1,7 @@
 ﻿using AdrGaspard.Tea.CommonTools;
-using AdrGaspard.Tea.Domain;
 using AdrGaspard.Tea.Domain.Repositories;
 
-namespace AdrGaspard.Tea.EntityFrameworkCore.Domain.Repositories
+namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
 {
     public static class EfCoreRepositoryExtensions
     {

@@ -1,11 +1,10 @@
 ﻿using AdrGaspard.Tea.CommonTools;
-using AdrGaspard.Tea.Domain;
 using AdrGaspard.Tea.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace AdrGaspard.Tea.EntityFrameworkCore.Domain.Repositories
+namespace AdrGaspard.Tea.Domain.EntityFrameworkCore.Repositories
 {
     public class EfCoreRepository<TDbContext, TEntity, TKey> : RepositoryBase<TEntity, TKey>, IEfCoreRepository<TEntity, TKey> where TDbContext : DbContext where TEntity : class, IEntity<TKey>
     {
