@@ -3,13 +3,13 @@
 namespace AdrGaspard.Tea.Application.DataTransfertObjects.Auditing
 {
     [Serializable]
-    public abstract class SoftDeleteEntityDto : IOutputDataTransfertObject, ISoftDelete
+    public abstract class SoftDeleteEntityDto : IOutputDto, ISoftDelete
     {
         public bool IsDeleted { get; set; }
     }
 
     [Serializable]
-    public abstract class SoftDeleteEntityDto<TKey> : SoftDeleteEntityDto
+    public abstract class SoftDeleteEntityDto<TKey> : SoftDeleteEntityDto, IEntityDto<TKey>
     {
 #pragma warning disable CS8618
         public TKey Id { get; set; }

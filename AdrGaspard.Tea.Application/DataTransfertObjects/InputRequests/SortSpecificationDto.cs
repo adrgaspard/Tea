@@ -2,7 +2,7 @@
 
 namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
 {
-    public class SortSpecificationDto : IInputDataTransfertObject
+    public class SortSpecificationDto : IInputDto
     {
         public ListSortDirection SortDirection { get; set; }
 

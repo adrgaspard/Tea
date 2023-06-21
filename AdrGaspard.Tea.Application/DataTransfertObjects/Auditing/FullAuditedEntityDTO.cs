@@ -11,7 +11,7 @@ namespace AdrGaspard.Tea.Application.DataTransfertObjects.Auditing
     }
 
     [Serializable]
-    public abstract class FullAuditedEntityDto<TKey> : FullAuditedEntityDto
+    public abstract class FullAuditedEntityDto<TKey> : FullAuditedEntityDto, IEntityDto<TKey>
     {
 #pragma warning disable CS8618
         public TKey Id { get; set; }

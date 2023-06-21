@@ -1,6 +1,6 @@
 ﻿namespace AdrGaspard.Tea.Application.DataTransfertObjects
 {
-    public interface IDataTransfertObject
+    public interface IOutputDto : IDto
     {
     }
 }
