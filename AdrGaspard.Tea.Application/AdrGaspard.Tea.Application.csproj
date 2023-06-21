@@ -10,8 +10,4 @@
     <ProjectReference Include="..\AdrGaspard.Tea.Domain\AdrGaspard.Tea.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataTransfertObjects\OutputResults\" />
-  </ItemGroup>
-
 </Project>

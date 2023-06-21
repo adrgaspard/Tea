@@ -2,14 +2,16 @@
 
 namespace AdrGaspard.Tea.Application.DataTransfertObjects.Auditing
 {
-    public abstract class FullAuditedEntityDTO : AuditedEntityDTO, IHasDeletionTime
+    [Serializable]
+    public abstract class FullAuditedEntityDto : AuditedEntityDto, IHasDeletionTime
     {
         public DateTime? DeletionTime { get; set; }
 
         public bool IsDeleted { get; set; }
     }
 
-    public abstract class FullAuditedEntityDTO<TKey> : FullAuditedEntityDTO
+    [Serializable]
+    public abstract class FullAuditedEntityDto<TKey> : FullAuditedEntityDto
     {
 #pragma warning disable CS8618
         public TKey Id { get; set; }

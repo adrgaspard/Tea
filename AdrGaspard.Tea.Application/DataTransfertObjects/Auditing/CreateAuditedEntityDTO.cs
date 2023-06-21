@@ -2,12 +2,14 @@
 
 namespace AdrGaspard.Tea.Application.DataTransfertObjects.Auditing
 {
-    public abstract class CreateAuditedEntityDTO : IOutputDataTransfertObject, IHasCreationTime
+    [Serializable]
+    public abstract class CreateAuditedEntityDto : IOutputDataTransfertObject, IHasCreationTime
     {
         public DateTime CreationTime { get; set; }
     }
 
-    public abstract class CreateAuditedEntityDTO<TKey> : CreateAuditedEntityDTO
+    [Serializable]
+    public abstract class CreateAuditedEntityDto<TKey> : CreateAuditedEntityDto
     {
 #pragma warning disable CS8618
         public TKey Id { get; set; }
