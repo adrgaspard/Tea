@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
+namespace AdrGaspard.Tea.Application.InputRequests
 {
     [Serializable]
-    public class PagedResultRequestDto : LimitedResultRequestDto, IPagedResultRequest
+    public class PagedResultRequest : LimitedResultRequest, IPagedResultRequest
     {
         [Range(0, int.MaxValue)]
         public int SkipCount { get; set; }

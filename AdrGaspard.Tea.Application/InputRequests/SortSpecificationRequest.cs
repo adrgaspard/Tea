@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel;
 
-namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
+namespace AdrGaspard.Tea.Application.InputRequests
 {
-    public class SortSpecificationDto : IInputDto
+    public class SortSpecificationRequest
     {
         public ListSortDirection SortDirection { get; set; }
 
         public string PropertyName { get; set; }
 
-        public SortSpecificationDto()
+        public SortSpecificationRequest()
         {
             PropertyName = "";
         }
 
-        public SortSpecificationDto(ListSortDirection sortDirection, string propertyName)
+        public SortSpecificationRequest(ListSortDirection sortDirection, string propertyName)
         {
             SortDirection = sortDirection;
             PropertyName = propertyName;

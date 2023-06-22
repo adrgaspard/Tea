@@ -1,4 +1,4 @@
-﻿namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
+﻿namespace AdrGaspard.Tea.Application.InputRequests
 {
     public interface ILimitedResultRequest
     {

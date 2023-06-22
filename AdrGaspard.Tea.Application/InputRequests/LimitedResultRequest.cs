@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
+namespace AdrGaspard.Tea.Application.InputRequests
 {
     [Serializable]
-    public class LimitedResultRequestDto : ILimitedResultRequest, IValidatableObject
+    public class LimitedResultRequest : ILimitedResultRequest, IValidatableObject
     {
         public virtual int DefaultMaxResultCount => 10;
         public virtual int MaxMaxResultCount => 1000;
@@ -11,7 +11,7 @@ namespace AdrGaspard.Tea.Application.DataTransfertObjects.InputRequests
         [Range(1, int.MaxValue)]
         public int MaxResultCount { get; set; }
 
-        public LimitedResultRequestDto()
+        public LimitedResultRequest()
         {
             MaxResultCount = DefaultMaxResultCount;
         }
