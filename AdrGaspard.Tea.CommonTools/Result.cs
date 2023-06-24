@@ -196,6 +196,13 @@
             return IsFailure ? failure(_error!) : success(_value!);
         }
 
+        public async Task<TResult> MatchAsync<TResult>(Func<TValue, TResult> success, Func<Exception, TResult> failure)
+        {
+            Exception error = _error!;
+            TValue value = _value!;
+            return await (IsFailure ? Task.Run(() => failure(error)) : Task.Run(() => success(value)));
+        }
+
         public Result<TResult> Map<TResult>(Func<TValue, TResult> function)
         {
             return IsFailure ? new Result<TResult>(_error!) : new Result<TResult>(function(_value!));

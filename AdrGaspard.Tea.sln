@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdrGaspard.Tea.EventBus", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdrGaspard.Tea.Application", "AdrGaspard.Tea.Application\AdrGaspard.Tea.Application.csproj", "{D5607980-08D3-4509-B18F-29907121CCCA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdrGaspard.Tea.Application.Contracts", "AdrGaspard.Tea.Application.Contracts\AdrGaspard.Tea.Application.Contracts.csproj", "{2D318062-0FF3-4D66-BC5E-DF9BB8C7723C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D5607980-08D3-4509-B18F-29907121CCCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5607980-08D3-4509-B18F-29907121CCCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5607980-08D3-4509-B18F-29907121CCCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D318062-0FF3-4D66-BC5E-DF9BB8C7723C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D318062-0FF3-4D66-BC5E-DF9BB8C7723C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D318062-0FF3-4D66-BC5E-DF9BB8C7723C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D318062-0FF3-4D66-BC5E-DF9BB8C7723C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
