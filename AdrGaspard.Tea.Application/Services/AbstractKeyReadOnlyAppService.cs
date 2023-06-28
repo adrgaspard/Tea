@@ -47,17 +47,27 @@ namespace AdrGaspard.Tea.Application.Services
             return query.Match<Result<TEntityResponse>>(entity => _mapper.Map(entity), error => error);
         }
 
-        public virtual async Task<Result<IPagedResponse<TEntityResponse>>> GetListAsync(TGetListRequest input, CancellationToken token = default)
+        public virtual async Task<Result<IPagedResult<TEntityResponse>>> GetListAsync(TGetListRequest input, CancellationToken token = default)
         {
             Result<long> countQuery = await _repository.GetCountAsync(token);
             Result<IList<TEntity>> getQuery = await _repository.GetManyAsync(input.SkipCount, input.MaxResultCount, token);
             return await countQuery.MatchAsync(count =>
-                getQuery.Match<Result<IPagedResponse<TEntityResponse>>>(entities => new PagedResultResponse<TEntityResponse>()
+                getQuery.Match<Result<IPagedResult<TEntityResponse>>>(entities => new PagedResultResult<TEntityResponse>()
                 {
                     Items = entities.Select(entity => _mapper.Map(entity)).ToList(),
                     TotalCount = count,
                 }, error => error)
             , error => error);
+        }
+
+        Task<Response<TEntityResponse>> IReadOnlyAppService<TEntityResponse, TGetListResponse, TKey, TGetListRequest>.GetAsync(TKey id, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Response<IPagedResult<TEntityResponse>>> IReadOnlyAppService<TEntityResponse, TGetListResponse, TKey, TGetListRequest>.GetListAsync(TGetListRequest input, CancellationToken token)
+        {
+            throw new NotImplementedException();
         }
     }
 }

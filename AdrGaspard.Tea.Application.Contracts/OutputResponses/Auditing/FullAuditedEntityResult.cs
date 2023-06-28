@@ -3,13 +3,15 @@
 namespace AdrGaspard.Tea.Application.Contracts.OutputResponses.Auditing
 {
     [Serializable]
-    public abstract class SoftDeleteEntityResponse : ISoftDelete
+    public abstract class FullAuditedEntityResult : AuditedEntityResult, IHasDeletionTime
     {
+        public DateTime? DeletionTime { get; init; }
+
         public bool IsDeleted { get; init; }
     }
 
     [Serializable]
-    public abstract class SoftDeleteEntityResponse<TKey> : SoftDeleteEntityResponse, IEntityResponse<TKey>
+    public abstract class FullAuditedEntityResult<TKey> : FullAuditedEntityResult, IEntityResult<TKey>
     {
 #pragma warning disable CS8618
         public TKey Id { get; init; }

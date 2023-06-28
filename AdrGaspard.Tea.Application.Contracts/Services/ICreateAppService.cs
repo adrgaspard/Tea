@@ -1,13 +1,13 @@
-﻿using AdrGaspard.Tea.CommonTools;
+﻿using AdrGaspard.Tea.Application.Contracts.OutputResponses;
 
 namespace AdrGaspard.Tea.Application.Contracts.Services
 {
-    public interface ICreateAppService<TEntityResponse> : ICreateAppService<TEntityResponse, TEntityResponse>
+    public interface ICreateAppService<TEntityResult> : ICreateAppService<TEntityResult, TEntityResult>
     {
     }
 
-    public interface ICreateAppService<TEntityResponse, in TCreateRequest>
+    public interface ICreateAppService<TEntityResult, in TCreateRequest>
     {
-        Task<Result<TEntityResponse>> CreateAsync(TCreateRequest input, CancellationToken token = default);
+        Task<Response<TEntityResult>> CreateAsync(TCreateRequest input, CancellationToken token = default);
     }
 }

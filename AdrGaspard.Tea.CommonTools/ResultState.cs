@@ -1,6 +1,6 @@
 ﻿namespace AdrGaspard.Tea.CommonTools
 {
-    internal enum ResultState : byte
+    public enum ResultState : byte
     {
         Failure,
         Success

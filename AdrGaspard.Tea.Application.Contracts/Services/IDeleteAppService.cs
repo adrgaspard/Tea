@@ -1,9 +1,9 @@
-﻿using AdrGaspard.Tea.CommonTools;
+﻿using AdrGaspard.Tea.Application.Contracts.OutputResponses;
 
 namespace AdrGaspard.Tea.Application.Contracts.Services
 {
     public interface IDeleteAppService<in TKey>
     {
-        Task<Result> DeleteAsync(TKey id, CancellationToken token = default);
+        Task<Response> DeleteAsync(TKey id, CancellationToken token = default);
     }
 }

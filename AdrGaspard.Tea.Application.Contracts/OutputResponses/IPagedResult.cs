@@ -1,7 +1,6 @@
 ﻿namespace AdrGaspard.Tea.Application.Contracts.OutputResponses
 {
-    public interface IEntityResponse<TKey>
+    public interface IPagedResult<TItem> : IListResult<TItem>, IHasTotalCount
     {
-        TKey Id { get; }
     }
 }

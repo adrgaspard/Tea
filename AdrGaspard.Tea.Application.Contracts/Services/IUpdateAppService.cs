@@ -1,13 +1,13 @@
-﻿using AdrGaspard.Tea.CommonTools;
+﻿using AdrGaspard.Tea.Application.Contracts.OutputResponses;
 
 namespace AdrGaspard.Tea.Application.Contracts.Services
 {
-    public interface IUpdateAppService<TEntityResponse, in TKey> : IUpdateAppService<TEntityResponse, TKey, TEntityResponse>
+    public interface IUpdateAppService<TEntityResult, in TKey> : IUpdateAppService<TEntityResult, TKey, TEntityResult>
     {
     }
 
-    public interface IUpdateAppService<TEntityResponse, in TKey, in TUpdateRequest>
+    public interface IUpdateAppService<TEntityResult, in TKey, in TUpdateRequest>
     {
-        Task<Result<TEntityResponse>> UpdateAsync(TKey id, TUpdateRequest input, CancellationToken token = default);
+        Task<Response<TEntityResult>> UpdateAsync(TKey id, TUpdateRequest input, CancellationToken token = default);
     }
 }

@@ -1,21 +1,20 @@
 ﻿using AdrGaspard.Tea.Application.Contracts.InputRequests;
 using AdrGaspard.Tea.Application.Contracts.OutputResponses;
-using AdrGaspard.Tea.CommonTools;
 
 namespace AdrGaspard.Tea.Application.Contracts.Services
 {
-    public interface IReadOnlyAppService<TEntityResponse, in TKey> : IReadOnlyAppService<TEntityResponse, TEntityResponse, TKey, PagedAndSortedResultRequest>
+    public interface IReadOnlyAppService<TEntityResult, in TKey> : IReadOnlyAppService<TEntityResult, TEntityResult, TKey, PagedAndSortedResultRequest>
     {
     }
 
-    public interface IReadOnlyAppService<TEntityResponse, in TKey, in TGetListRequest> : IReadOnlyAppService<TEntityResponse, TEntityResponse, TKey, TGetListRequest>
+    public interface IReadOnlyAppService<TEntityResult, in TKey, in TGetListRequest> : IReadOnlyAppService<TEntityResult, TEntityResult, TKey, TGetListRequest>
     {
     }
 
-    public interface IReadOnlyAppService<TEntityResponse, TGetListResponse, in TKey, in TGetListRequest>
+    public interface IReadOnlyAppService<TEntityResult, TGetListResponse, in TKey, in TGetListRequest>
     {
-        Task<Result<TEntityResponse>> GetAsync(TKey id, CancellationToken token = default);
+        Task<Response<TEntityResult>> GetAsync(TKey id, CancellationToken token = default);
 
-        Task<Result<IPagedResponse<TEntityResponse>>> GetListAsync(TGetListRequest input, CancellationToken token = default);
+        Task<Response<IPagedResult<TEntityResult>>> GetListAsync(TGetListRequest input, CancellationToken token = default);
     }
 }
