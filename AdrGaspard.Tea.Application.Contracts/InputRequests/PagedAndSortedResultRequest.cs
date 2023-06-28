@@ -2,6 +2,6 @@
 {
     public class PagedAndSortedResultRequest : PagedResultRequest, IPagedAndSortedResultRequest
     {
-        public required IReadOnlyList<SortSpecificationRequest> Sorting { get; init; }
+        public IReadOnlyList<SortSpecificationRequest> Sorting { get; init; }
     }
 }

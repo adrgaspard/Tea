@@ -2,6 +2,6 @@
 {
     public class ValidationFailureResponse
     {
-        public required IReadOnlyList<ValidationResponse> Errors { get; init; }
+        public IReadOnlyList<ValidationResponse> Errors { get; init; }
     }
 }

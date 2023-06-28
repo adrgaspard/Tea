@@ -4,8 +4,6 @@ namespace AdrGaspard.Tea.EventBus.Exceptions
 {
     public class EventBusException : ErrorException
     {
-        public IEventBus EventBus { get; }
-
         public EventBusException(IEventBus eventBus) : base($"An unknown {nameof(EventBusException)} occured!")
         {
             EventBus = eventBus;
@@ -20,5 +18,7 @@ namespace AdrGaspard.Tea.EventBus.Exceptions
         {
             EventBus = eventBus;
         }
+
+        public IEventBus EventBus { get; }
     }
 }

@@ -2,7 +2,6 @@
 
 namespace AdrGaspard.Tea.Application.Contracts.OutputResponses.Auditing
 {
-
     [Serializable]
     public abstract class AuditedEntityResponse : CreateAuditedEntityResponse, IHasModificationTime
     {

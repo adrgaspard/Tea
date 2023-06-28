@@ -3,6 +3,6 @@
     [Serializable]
     public class LimitedResultRequest : ILimitedResultRequest
     {
-        public required int MaxResultCount { get; init; }
+        public int MaxResultCount { get; init; }
     }
 }

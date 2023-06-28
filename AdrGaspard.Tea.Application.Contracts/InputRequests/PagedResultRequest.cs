@@ -3,6 +3,6 @@
     [Serializable]
     public class PagedResultRequest : LimitedResultRequest, IPagedResultRequest
     {
-        public required int SkipCount { get; init; }
+        public int SkipCount { get; init; }
     }
 }

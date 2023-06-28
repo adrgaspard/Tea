@@ -2,8 +2,8 @@
 {
     public class ValidationResponse
     {
-        public required string PropertyName { get; init; }
+        public string PropertyName { get; init; }
 
-        public required string Message { get; init; }
+        public string Message { get; init; }
     }
 }

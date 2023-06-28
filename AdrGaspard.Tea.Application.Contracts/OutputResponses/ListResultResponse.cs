@@ -3,6 +3,6 @@
     [Serializable]
     public class ListResultResponse<TItem> : IListResponse<TItem>
     {
-        public required IReadOnlyList<TItem> Items { get; init; }
+        public IReadOnlyList<TItem> Items { get; init; }
     }
 }

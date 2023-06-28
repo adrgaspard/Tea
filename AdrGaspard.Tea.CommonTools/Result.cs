@@ -2,8 +2,8 @@
 {
     public readonly struct Result : IEquatable<Result>
     {
-        public const string NullErrorName = "Result : Null error";
-        public const string SuccessName = "Result : Success";
+        public const string NullErrorName = $"{nameof(Result)} : Null error";
+        public const string SuccessName = $"{nameof(Result)} : Success";
 
         public static readonly Result Ok = new();
 
@@ -21,6 +21,12 @@
             _state = ResultState.Failure;
             _error = error;
         }
+
+        public bool IsFailure => _state == ResultState.Failure;
+
+        public bool IsSuccess => _state == ResultState.Success;
+
+        public Exception Error => _error!;
 
         public static implicit operator Result(Exception error)
         {
@@ -52,12 +58,6 @@
             return value;
         }
 
-        public bool IsFailure => _state == ResultState.Failure;
-
-        public bool IsSuccess => _state == ResultState.Success;
-
-        public Exception Error => _error!;
-
         public override string ToString()
         {
             return IsFailure ? _error?.ToString() ?? NullErrorName : SuccessName;
@@ -82,6 +82,12 @@
         public TResult Match<TResult>(Func<TResult> success, Func<Exception, TResult> failure)
         {
             return IsFailure ? failure(_error!) : success();
+        }
+
+        public async Task<TResult> MatchAsync<TResult>(Func<TResult> success, Func<Exception, TResult> failure)
+        {
+            Exception error = _error!;
+            return await (IsFailure ? Task.Run(() => failure(error)) : Task.Run(() => success()));
         }
 
         public Result<TResult> Map<TResult>(Func<TResult> function)
@@ -112,7 +118,7 @@
 
     public readonly struct Result<TValue> : IEquatable<Result<TValue>>
     {
-        public const string NullValueName = "Result : Null value";
+        public const string NullValueName = $"{nameof(Result<TValue>)} : Null value";
 
         private readonly ResultState _state;
         private readonly TValue? _value;
@@ -131,6 +137,14 @@
             _error = error;
             _value = default;
         }
+
+        public bool IsFailure => _state == ResultState.Failure;
+
+        public bool IsSuccess => _state == ResultState.Success;
+
+        public Exception Error => _error!;
+
+        public TValue Value => _value!;
 
         public static implicit operator Result<TValue>(TValue value)
         {
@@ -151,14 +165,6 @@
         {
             return !(left == right);
         }
-
-        public bool IsFailure => _state == ResultState.Failure;
-
-        public bool IsSuccess => _state == ResultState.Success;
-
-        public Exception Error => _error!;
-
-        public TValue Value => _value!;
 
         public override string ToString()
         {

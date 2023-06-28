@@ -29,8 +29,6 @@ namespace AdrGaspard.Tea.Domain.Repositories
             }
         }
 
-        protected abstract Task<Result> SaveChangesAsync(CancellationToken cancellationToken = default);
-
         public virtual async Task<Result> DeleteManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
             foreach (TEntity entity in entities)
@@ -106,6 +104,8 @@ namespace AdrGaspard.Tea.Domain.Repositories
             }
             return Result.Ok;
         }
+
+        protected abstract Task<Result> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 
     public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey> where TKey : IEquatable<TKey>

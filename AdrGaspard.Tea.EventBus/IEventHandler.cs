@@ -2,7 +2,6 @@
 
 namespace AdrGaspard.Tea.EventBus
 {
-
     public interface IEventHandler
     {
     }
