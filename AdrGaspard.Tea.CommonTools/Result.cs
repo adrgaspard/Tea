@@ -139,6 +139,39 @@
             return !(left == right);
         }
 
+        public TResult Match<TResult>(Func<TValue, TResult> success, Func<Exception, TResult> failure)
+        {
+            return IsFailure ? failure(_error!) : success(_value!);
+        }
+
+        public async Task<TResult> MatchAsync<TResult>(Func<TValue, TResult> success, Func<Exception, TResult> failure)
+        {
+            Exception error = _error!;
+            TValue value = _value!;
+            return await (IsFailure ? Task.Run(() => failure(error)) : Task.Run(() => success(value)));
+        }
+
+        public async Task<TResult> MatchAsync<TResult>(Func<TValue, Task<TResult>> success, Func<Exception, TResult> failure)
+        {
+            Exception error = _error!;
+            TValue value = _value!;
+            return await (IsFailure ? Task.Run(() => failure(error)) : success(value));
+        }
+
+        public async Task<TResult> MatchAsync<TResult>(Func<TValue, TResult> success, Func<Exception, Task<TResult>> failure)
+        {
+            Exception error = _error!;
+            TValue value = _value!;
+            return await (IsFailure ? failure(error) : Task.Run(() => success(value)));
+        }
+
+        public async Task<TResult> MatchAsync<TResult>(Func<TValue, Task<TResult>> success, Func<Exception, Task<TResult>> failure)
+        {
+            Exception error = _error!;
+            TValue value = _value!;
+            return await (IsFailure ? failure(error) : success(value));
+        }
+
         public Result<TValue> With(Result other)
         {
             return IsFailure ? this : other.IsFailure ? other.Error : this;
