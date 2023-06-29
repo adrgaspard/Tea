@@ -6,6 +6,6 @@ namespace AdrGaspard.Tea.Application.Contracts.InputRequests
     {
         public ListSortDirection SortDirection { get; init; }
 
-        public required string PropertyName { get; init; }
+        public string PropertyName { get; init; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AdrGaspard.Tea.CommonTools;
 
-namespace AdrGaspard.Tea.Application.Contracts.OutputResponses
+namespace AdrGaspard.Tea.Application.Contracts.OutputResults
 {
     public readonly struct Response : IEquatable<Response>
     {

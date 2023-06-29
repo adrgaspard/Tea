@@ -1,5 +1,5 @@
 ﻿using AdrGaspard.Tea.Application.Contracts.InputRequests;
-using AdrGaspard.Tea.Application.Contracts.OutputResponses;
+using AdrGaspard.Tea.Application.Contracts.OutputResults;
 
 namespace AdrGaspard.Tea.Application.Contracts.Services
 {

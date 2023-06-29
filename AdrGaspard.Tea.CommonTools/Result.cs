@@ -58,46 +58,19 @@
             return value;
         }
 
+        public Result With(Result other)
+        {
+            return IsFailure ? this : other;
+        }
+
+        public Result<TValue> With<TValue>(Result<TValue> other)
+        {
+            return IsFailure ? Error : other;
+        }
+
         public override string ToString()
         {
             return IsFailure ? _error?.ToString() ?? NullErrorName : SuccessName;
-        }
-
-        public void IfFailure(Action<Exception> function)
-        {
-            if (IsFailure)
-            {
-                function(_error!);
-            }
-        }
-
-        public void IfSuccess(Action function)
-        {
-            if (IsSuccess)
-            {
-                function();
-            }
-        }
-
-        public TResult Match<TResult>(Func<TResult> success, Func<Exception, TResult> failure)
-        {
-            return IsFailure ? failure(_error!) : success();
-        }
-
-        public async Task<TResult> MatchAsync<TResult>(Func<TResult> success, Func<Exception, TResult> failure)
-        {
-            Exception error = _error!;
-            return await (IsFailure ? Task.Run(() => failure(error)) : Task.Run(() => success()));
-        }
-
-        public Result<TResult> Map<TResult>(Func<TResult> function)
-        {
-            return IsFailure ? new Result<TResult>(_error!) : new Result<TResult>(function());
-        }
-
-        public async Task<Result<TResult>> MapAsync<TResult>(Func<Task<TResult>> function)
-        {
-            return IsFailure ? new Result<TResult>(_error!) : new Result<TResult>(await function());
         }
 
         public bool Equals(Result other)
@@ -166,57 +139,19 @@
             return !(left == right);
         }
 
+        public Result<TValue> With(Result other)
+        {
+            return IsFailure ? this : other.IsFailure ? other.Error : this;
+        }
+
+        public Result<(TValue, TOtherValue)> With<TOtherValue>(Result<TOtherValue> other)
+        {
+            return IsFailure ? Error : other.IsFailure ? other.Error : (Value, other.Value);
+        }
+
         public override string ToString()
         {
             return IsFailure ? _error?.ToString() ?? Result.NullErrorName : _value?.ToString() ?? NullValueName;
-        }
-
-        public TValue IfFailure(TValue defaultValue)
-        {
-            return IsFailure ? defaultValue : _value!;
-        }
-
-        public TValue IfFailure(Func<Exception, TValue> function)
-        {
-            return IsFailure ? function(_error!) : _value!;
-        }
-
-        public void IfFailure(Action<Exception> function)
-        {
-            if (IsFailure)
-            {
-                function(_error!);
-            }
-        }
-
-        public void IfSuccess(Action<TValue> function)
-        {
-            if (IsSuccess)
-            {
-                function(_value!);
-            }
-        }
-
-        public TResult Match<TResult>(Func<TValue, TResult> success, Func<Exception, TResult> failure)
-        {
-            return IsFailure ? failure(_error!) : success(_value!);
-        }
-
-        public async Task<TResult> MatchAsync<TResult>(Func<TValue, TResult> success, Func<Exception, TResult> failure)
-        {
-            Exception error = _error!;
-            TValue value = _value!;
-            return await (IsFailure ? Task.Run(() => failure(error)) : Task.Run(() => success(value)));
-        }
-
-        public Result<TResult> Map<TResult>(Func<TValue, TResult> function)
-        {
-            return IsFailure ? new Result<TResult>(_error!) : new Result<TResult>(function(_value!));
-        }
-
-        public async Task<Result<TResult>> MapAsync<TResult>(Func<TValue, Task<TResult>> function)
-        {
-            return IsFailure ? new Result<TResult>(_error!) : new Result<TResult>(await function(_value!));
         }
 
         public bool Equals(Result<TValue> other)

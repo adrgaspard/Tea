@@ -1,9 +1,9 @@
-﻿namespace AdrGaspard.Tea.Application.Contracts.OutputResponses.Validation
+﻿namespace AdrGaspard.Tea.Application.Contracts.OutputResults.Validation
 {
     public class ValidationErrorResult : ErrorResult
     {
-        public required string PropertyName { get; init; }
+        public string PropertyName { get; init; }
 
-        public required string Message { get; init; }
+        public string Message { get; init; }
     }
 }

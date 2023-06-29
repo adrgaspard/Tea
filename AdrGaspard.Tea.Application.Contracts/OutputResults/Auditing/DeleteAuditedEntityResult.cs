@@ -1,6 +1,6 @@
 ﻿using AdrGaspard.Tea.Domain.Auditing;
 
-namespace AdrGaspard.Tea.Application.Contracts.OutputResponses.Auditing
+namespace AdrGaspard.Tea.Application.Contracts.OutputResults.Auditing
 {
     [Serializable]
     public abstract class DeleteAuditedEntityResult : SoftDeleteEntityResult, IHasDeletionTime
